@@ -17,6 +17,20 @@ func say(s string) {
 func main() {
 	fmt.Println("Start ...")
 
+	ch := make(chan string, 10)
+
+	ch <- "jhhh"
+	ch <- "done"
+
+	for {
+		select {
+		case value := <-ch:
+			//value := <-ch
+			fmt.Println(value)
+		}
+
+	}
+
 	go say("world") //开一个新的Goroutines执行
 	say("hello")    //当前Goroutines执行
 	// ch := make(chan int, 1)
